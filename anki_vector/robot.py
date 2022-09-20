@@ -113,7 +113,7 @@ class Robot:
                  config: dict = None,
                  escape_pod: bool = None,
                  default_logging: bool = True,
-                 behavior_activation_timeout: int = 10,
+                 behavior_activation_timeout: int = 20,
                  cache_animation_lists: bool = True,
                  enable_face_detection: bool = False,
                  estimate_facial_expression: bool = False,
@@ -628,7 +628,7 @@ class Robot:
         self._last_image_time_stamp = msg.last_image_time_stamp
         self._status.set(msg.status)
 
-    def connect(self, timeout: int = 10) -> None:
+    def connect(self, timeout: int = 20) -> None:
         """Start the connection to Vector.
 
         .. testcode::
@@ -647,7 +647,7 @@ class Robot:
         self.events.start(self.conn)
 
         # Initialize components
-        self._anim = animation.AnimationComponent(self)
+      #  self._anim = animation.AnimationComponent(self)
         self._audio = audio.AudioComponent(self)
         self._behavior = behavior.BehaviorComponent(self)
         self._faces = faces.FaceComponent(self)
@@ -663,14 +663,14 @@ class Robot:
         self._world = world.World(self)
         self._camera = camera.CameraComponent(self)
 
-        if self.cache_animation_lists:
+ #       if self.cache_animation_lists:
             # Load animation triggers and animations so they are ready to play when requested
-            anim_request = self._anim.load_animation_list()
-            if isinstance(anim_request, concurrent.futures.Future):
-                anim_request.result()
-            anim_trigger_request = self._anim.load_animation_trigger_list()
-            if isinstance(anim_trigger_request, concurrent.futures.Future):
-                anim_trigger_request.result()
+#            anim_request = self._anim.load_animation_list()
+  #          if isinstance(anim_request, concurrent.futures.Future):
+   #             anim_request.result()
+    #        anim_trigger_request = self._anim.load_animation_trigger_list()
+     #       if isinstance(anim_trigger_request, concurrent.futures.Future):
+      #          anim_trigger_request.result()
 
         # TODO enable audio feed when ready
 
